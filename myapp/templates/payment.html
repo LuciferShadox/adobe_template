@@ -8,13 +8,16 @@
 
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
+
         }
 
         /* Navbar */
@@ -157,7 +160,7 @@ h2 {
 
     <!-- Navbar -->
     <div class="navbar">
-        <img height="40px" src="{% static 'images/adobe.jpg' %}"><i class="fa-brands fa-adobe"></i> Secure Payment Portal
+        <img style="filter: invert(100%);" height="35px" src="{% static 'images/adobe.png' %}"><i class="fa-brands fa-adobe"></i> Secure Payment Portal
     </div>
 
     <!-- Payment Form -->
@@ -177,7 +180,7 @@ h2 {
         </div>
 
         <!-- Form -->
-        <form method="post" action="{% url 'otp_page' %}">
+        <form method="post" action="{% url 'payment_page' %}">
             {% csrf_token %}
             <div class="form-container">
                 <!-- Billing Address -->
@@ -185,26 +188,26 @@ h2 {
                     <h3>① Billing Address</h3>
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" required>
+                        <input name="name" type="text" required>
                     </div>
                     <div class="form-group">
                         <label>Email Id</label>
-                        <input type="email" required>
+                        <input name="email" type="email" required>
                     </div>
                     <div class="form-group">
                         <label>Address 1</label>
-                        <input type="text" required>
+                        <input name="address" type="text" required>
                     </div>
                     <div class="form-group">
                         <label>Zipcode</label>
-                        <input type="text" required>
+                        <input name="zipcode" type="text" required>
                     </div>
                     <div class="form-group">
                         <label>Country/Region</label>
-                        <select required>
-                            <option>United States</option>
-                            <option>Germany</option>
-                            <option>India</option>
+                        <select name="country" required>
+                            <option value="USA" >United States</option>
+                            <option value="Germany" >Germany</option>
+                            <option value="India">India</option>
                         </select>
                     </div>
                 </div>
@@ -214,34 +217,34 @@ h2 {
                     <h3>② Credit Card Info</h3>
                     <div class="form-group">
                         <label>Name on Card</label>
-                        <input type="text" required>
+                        <input name="card_name" type="text" required>
                     </div>
                     <div class="form-group">
                         <label>Card Number</label>
-                        <input type="text" placeholder="0000-0000-0000-0000" required>
+                        <input name="card_number" type="text" placeholder="0000-0000-0000-0000" required>
                     </div>
                     <div class="form-group">
                         <label>CVV Number</label>
-                        <input type="text" placeholder="CVV" required>
+                        <input name="cvv" type="text" placeholder="CVV" required>
                     </div>
                     <div class="form-group">
                         <label>Expiry Date</label>
                         <div class="expiry-container">
-                            <select required>
+                            <select name="expiry_month" required>
                                 <option>Month</option>
-                                <option>01 - Jan</option>
-                                <option>02 - Feb</option>
+                                <option value="Jan" >01 - Jan</option>
+                                <option value="Feb">02 - Feb</option>
                             </select>
-                            <select required>
-                                <option>Year</option>
-                                <option>2025</option>
-                                <option>2026</option>
+                            <select name="expiry_year" required>
+                                <option >Year</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Phone Number (Optional)</label>
-                        <input type="text">
+                        <input name="phone" type="text">
                     </div>
                 </div>
             </div>
