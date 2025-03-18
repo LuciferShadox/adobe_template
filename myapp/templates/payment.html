@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment Portal</title>
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: black;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .navbar i {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.title-container::before,
+.title-container::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: black;
+    margin: 0 10px; /* Adjust space between line and text */
+    max-width: 200px; /* Controls line length */
+}
+
+h2 {
+    margin: 0;
+    font-size: 20px; /* Adjust as needed */
+}
+        p {
+            font-size: 14px;
+            color: gray;
+            margin-bottom: 20px;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .payment-methods img {
+            width: 60px;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Form Styling */
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+
+        .form-section {
+            flex: 1;
+            text-align: left;
+        }
+
+        .form-section h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid black; /* Black borders */
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* Expiry Fields */
+        .expiry-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .expiry-container select {
+            flex: 1;
+        }
+
+        /* Submit Button */
+        .submit-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .submit-btn {
+            padding: 8px 20px;
+            font-size: 14px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 20px; /* Pill shape */
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <i class="fa-brands fa-adobe"></i> Secure Payment Portal
+    </div>
+
+    <!-- Payment Form -->
+    <div class="container">
+        <div class="title-container">
+            <h2>Billing Info</h2>
+        </div>
+
+        <p>Please provide your credit card information. This information will be sent securely to Adobe.</p>
+
+        <!-- Payment Methods -->
+        <div class="payment-methods">
+            <img src="{% static 'images/mastercard.png' %}" alt="Mastercard">
+            <img src="{% static 'images/amex.png' %}" alt="Amex">
+            <img src="{% static 'images/discover.png' %}" alt="Discover">
+            <img src="{% static 'images/paypal.png' %}" alt="PayPal">
+        </div>
+
+        <!-- Form -->
+        <form method="post" action="{% url 'otp_page' %}">
+            {% csrf_token %}
+            <div class="form-container">
+                <!-- Billing Address -->
+                <div class="form-section billing-section">
+                    <h3>① Billing Address</h3>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Id</label>
+                        <input type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Address 1</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Zipcode</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Country/Region</label>
+                        <select required>
+                            <option>United States</option>
+                            <option>Germany</option>
+                            <option>India</option>
+                        </select>
+                    </div>
+                </div>
+            
+                <!-- Credit Card Info -->
+                <div class="form-section credit-card-section">
+                    <h3>② Credit Card Info</h3>
+                    <div class="form-group">
+                        <label>Name on Card</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Card Number</label>
+                        <input type="text" placeholder="0000-0000-0000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label>CVV Number</label>
+                        <input type="text" placeholder="CVV" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Expiry Date</label>
+                        <div class="expiry-container">
+                            <select required>
+                                <option>Month</option>
+                                <option>01 - Jan</option>
+                                <option>02 - Feb</option>
+                            </select>
+                            <select required>
+                                <option>Year</option>
+                                <option>2025</option>
+                                <option>2026</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number (Optional)</label>
+                        <input type="text">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="submit-container">
+                <button type="submit" class="submit-btn">Submit</button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+</html>

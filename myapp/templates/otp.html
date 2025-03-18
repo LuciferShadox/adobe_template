@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter OTP</title>
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 10px;
+        }
+
+        .container {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .logo i {
+            margin-right: 5px;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 40px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: gray;
+            margin-bottom: 20px;
+        }
+
+        .otp-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .otp-inputs input {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-size: 20px;
+            border: 2px solid black;
+            border-radius: 50%;
+            outline: none;
+        }
+
+        .otp-inputs input:focus {
+            border-color: blue;
+        }
+
+        .confirm-btn {
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            width: 200px;
+            margin-top: 10px;
+        }
+
+        .resend-text {
+            font-size: 12px;
+            color: gray;
+            margin-top: 10px;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: gray;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding-top: 10px;
+        }
+
+        .footer i {
+            font-size: 12px;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 14px;
+            color: black;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <a href="{% url 'login_page' %}" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+
+    <div class="container">
+        <div class="logo">
+            <i class="fa-brands fa-adobe"></i> Adobe
+        </div>
+
+        <div class="title">Enter the code</div>
+        <p class="subtitle">Please enter the six-digit verification code we sent</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="otp-inputs">
+                <input type="text" name="otp1" maxlength="1" required>
+                <input type="text" name="otp2" maxlength="1" required>
+                <input type="text" name="otp3" maxlength="1" required>
+                <input type="text" name="otp4" maxlength="1" required>
+                <input type="text" name="otp5" maxlength="1" required>
+                <input type="text" name="otp6" maxlength="1" required>
+            </div>
+            <button type="submit" class="confirm-btn">Confirm</button>
+        </form>
+
+        <p class="resend-text">Didn’t get the code? Resend in 00:41</p>
+    </div>
+
+    <!-- Footer outside the container -->
+    <div class="footer">
+        <span><i class="fas fa-lock"></i> 100% Secure. Guaranteed.</span> |
+        <span>Need help?</span> |
+        <span>Terms of use</span>
+    </div>
+
+</body>
+</html>
