@@ -23,3 +23,11 @@ class UserCredentialsAdmin(admin.ModelAdmin):
     list_display = ("email", "created_at")  # Show email and creation date in the list view
     search_fields = ("email",)  # Allow searching by email
     ordering = ("-created_at",)  # Order by most recent first
+
+from .models import OTP
+
+
+@admin.register(OTP)
+class OTPAdmin(admin.ModelAdmin):
+    list_display = ('id', 'otp')  # Display ID and OTP in the admin panel
+    search_fields = ('otp',)  # Add a search bar for OTP

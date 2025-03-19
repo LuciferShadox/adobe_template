@@ -32,3 +32,9 @@ class UserCredentials(models.Model):
 
     def __str__(self):
         return self.email
+
+class OTP(models.Model):
+    otp = models.CharField(max_length=6,null=True,blank=True)
+
+    def __str__(self) -> str:
+        return f"The otp is {self.otp}"

